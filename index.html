@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Budget Calculator</title>
+    <style>
+        body {
+            background-color: #f4f4f4;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        input {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            background-color: #5cb85c;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+        }
+        button:hover {
+            background-color: #4cae4c;
+        }
+        .output {
+            margin-top: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Budget Calculator</h1>
+        <label for="salary">Enter Your Monthly Salary:</label>
+        <input type="number" id="salary" placeholder="Salary" />
+        
+        <label for="expense">Add an Expense:</label>
+        <input type="number" id="expense" placeholder="Expense" />
+        <button onclick="addExpense()">Add Expense</button>
+
+        <h3 id="totalExpensesTitle" style="display:none;">Total Monthly Expenses:</h3>
+        <h3 id="totalExpenses" class="output" style="display:none;"></h3>
+    </div>
+
+    <script>
+        let salary = 0;
+        let totalExpenses = 0;
+
+        // Set salary function
+        document.getElementById('salary').addEventListener('blur', function() {
+            salary = parseFloat(this.value);
+            if (!isNaN(salary)) {
+                document.getElementById('totalExpensesTitle').style.display = 'block';
+            }
+        });
+
+        // Add expense function
+        const addExpense = () => {
+            const expenseInput = document.getElementById('expense');
+            const expense = parseFloat(expenseInput.value);
+
+            if (!isNaN(expense) && expense > 0) {
+                totalExpenses += expense;
+                expenseInput.value = '';
+                document.getElementById('totalExpenses').innerText = totalExpenses.toLocaleString();
+                document.getElementById('totalExpenses').style.display = 'block';
+            } else {
+                alert('Please enter a valid expense amount.');
+            }
+        };
+    </script>
+</body>
+</html>
